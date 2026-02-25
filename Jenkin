@@ -1,6 +1,10 @@
 pipeline {
   agent any
 
+  environment {
+    NEW_VERSION=1.2
+  }
+
   stages {
     stage("build"){
       steps {
@@ -14,7 +18,7 @@ pipeline {
     }
   stage("deploy"){
       steps {
-        echo "deploying the application"
+        echo "deploying the application in version ${NEW_VERSION}"
       }
     }
   }
