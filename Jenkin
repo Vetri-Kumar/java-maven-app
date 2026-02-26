@@ -9,7 +9,7 @@ pipeline {
   }
 
   environment {
-    NEW_VERSION = params.VERSION
+    NEW_VERSION = $params.VERSION
   }
 
   stages {
