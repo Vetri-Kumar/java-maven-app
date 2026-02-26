@@ -2,38 +2,56 @@ def gv
 
 pipeline {   
     agent any
-    tools {
-        maven 'maven-jenkins-3.9.12'
-    }
+    // tools {
+    //     maven 'maven-jenkins-3.9.12'
+    // }
     stages {
-        stage("init") {
+        // stage("init") {
+        //     steps {
+        //         script {
+        //             gv = load "script.groovy"
+        //         }
+        //     }
+        // }
+        stage("test"){
             steps {
                 script {
-                    gv = load "script.groovy"
+                    echo "testing the application"
                 }
             }
         }
         stage("build jar") {
+            when {
+                expression {
+                    BRANCH_NAME == 'main'
+                }
+            }
             steps {
                 script {
-                    gv.buildJar()
-
+                    // gv.buildJar()
+                    echo "building the application"
                 }
             }
         }
 
-        stage("build image") {
-            steps {
-                script {
-                    gv.buildImage()
-                }
-            }
-        }
+        // stage("build image") {
+        //     steps {
+        //         script {
+        //             gv.buildImage()
+        //         }
+        //     }
+        // }
 
         stage("deploy") {
+            when {
+                expression {
+                    BRANCH_NAME == 'main'
+                }
+            }
             steps {
                 script {
-                    gv.deployApp()
+                    // gv.deployApp()
+                    echo "deploying the application"
                 }
             }
         }               
