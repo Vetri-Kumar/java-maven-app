@@ -43,7 +43,7 @@ pipeline {
                 script {
                     // gv.buildImage()
                     echo "building the image"
-                    buildImage()
+                    buildImage 'vetri18/not-public:jma-9.6.9'
                     
                 }
             }
