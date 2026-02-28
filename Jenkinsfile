@@ -43,8 +43,9 @@ pipeline {
                 script {
                     // gv.buildImage()
                     echo "building the image"
-                    buildImage 'vetri18/not-public:jma-9.6.9'
-                    
+                    buildImage 'vetri18/not-public:jma-9.6.9.6'
+                    dockerLogin()
+                    dockerPush 'vetri18/not-public:jma-9.6.9.6'
                 }
             }
         }
