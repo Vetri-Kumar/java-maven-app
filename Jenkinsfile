@@ -83,7 +83,7 @@ pipeline {
             steps {
                 script {
                     echo 'building the application'
-                    sh 'mvn clearn package'
+                    sh 'mvn clean package'
                 }
             }
         }
