@@ -66,6 +66,7 @@ pipeline {
             steps {
                 echo "building the application"
                 echo "did it worked?"
+                echo "DID ITTTTTTT?"
             }
         }
     }
