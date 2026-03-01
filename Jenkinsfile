@@ -57,7 +57,7 @@
 //         }               
 //     }
 // } 
-
+def IMAGE_NAME
 pipeline {
     agent any
 
