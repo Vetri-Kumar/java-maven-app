@@ -59,7 +59,7 @@
 // } 
 
 pipeline {
-    ageny any
+    agent any
 
     stages {
         stage('build'){
