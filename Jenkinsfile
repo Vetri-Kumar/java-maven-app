@@ -2,17 +2,17 @@ def gv
 
 pipeline {   
     agent any
-    // tools {
-    //     maven 'maven-jenkins-3.9.12'
-    // }
+    tools {
+        maven 'maven-jenkins-3.9.12'
+    }
     stages {
-        // stage("init") {
-        //     steps {
-        //         script {
-        //             gv = load "script.groovy"
-        //         }
-        //     }
-        // }
+        stage("init") {
+            steps {
+                script {
+                    gv = load "script.groovy"
+                }
+            }
+        }
         stage("test"){
             steps {
                 script {
@@ -28,19 +28,19 @@ pipeline {
             }
             steps {
                 script {
-                    // gv.buildJar()
+                    gv.buildJar()
                     echo "building the application"
                 }
             }
         }
 
-        // stage("build image") {
-        //     steps {
-        //         script {
-        //             gv.buildImage()
-        //         }
-        //     }
-        // }
+        stage("build image") {
+            steps {
+                script {
+                    gv.buildImage()
+                }
+            }
+        }
 
         stage("deploy") {
             when {
@@ -50,7 +50,7 @@ pipeline {
             }
             steps {
                 script {
-                    // gv.deployApp()
+                    gv.deployApp()
                     echo "deploying the application"
                 }
             }
