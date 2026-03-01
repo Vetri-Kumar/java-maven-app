@@ -57,7 +57,7 @@
 //         }               
 //     }
 // } 
-def IMAGE_NAME
+
 pipeline {
     agent any
 
@@ -74,8 +74,8 @@ pipeline {
                     -DnewVersion=\\\${parsedVersion.majorVersion}.\\\${parsedVersion.minorVersion}.\\\${parsedVersion.nextIncrementalVersion} \
                     versions:commit"
                     def matcher = readFile('pom.xml') =~ '<version>(.+)</version>'
-                    def version = matcher[0[[1]
-                    IMAGE_NAME = "$version-$BUILD_NUMBER"
+                    def version = matcher[0][1]
+                    env.IMAGE_NAME = "$version-$BUILD_NUMBER"
                 }
             }
         }
