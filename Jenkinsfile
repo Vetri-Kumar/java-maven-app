@@ -65,7 +65,7 @@ pipeline {
         stage('build'){
             steps {
                 echo "building the application"
-                echo "worked?"
+                echo "did it worked?"
             }
         }
     }
