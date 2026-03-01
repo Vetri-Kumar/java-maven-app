@@ -63,7 +63,7 @@ pipeline {
             steps {
                 script {
                     // gv.deployApp()
-                    echo "deploying the application"
+                    echo "deploying the application automatically github"
                 }
             }
         }               
