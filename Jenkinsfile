@@ -61,12 +61,50 @@
 pipeline {
     agent any
 
+    tools {
+        maven 'maven-jenkins-3.9.12'
+    }
+
     stages {
-        stage('build'){
+        stage('increment version'){
             steps {
-                echo "building the application"
-                echo "did it worked?"
-                echo "DID ITTTTTTT?"
+                script {
+                    echo "incremention the application version"
+                    sh "mvn build-helper:parse-version versions:set \
+                    -DnewVersion=\\\${parsedVersion.majorVersion}.\\\${parsedVersion.minorVersion}.\\\${parsedVersion.nextIncrementalVersion} \
+                    versions:commit"
+                    def matcher = readFile('pom.xml') =~ '<version>(.+)</version>'
+                    def version = matcher[0[[1]
+                    env.IMAGE_NAME = "$version-$BUILD_NUMBER"
+                }
+            }
+        }
+        stage('build Jar'){
+            steps {
+                script {
+                    echo 'building the application'
+                    sh 'mvn clearn package'
+                }
+            }
+        }
+                                            
+        stage ('build image'){
+            steps {
+                script {
+                    echo "building the docker image..."
+                    withCredentials([usernamePassword(credentialsId: 'dockerhub-id', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
+                        sh "docker build -t vetri18/not-public:${IMAGE_NAME} ."
+                        sh 'echo $PASS | docker login -u $USER --password-stdin'
+                        sh "docker push vetri18/not-public:${IMAGE_NAME}"
+                    }
+                }
+            }
+        }
+        stage("deploy") {        
+            steps {
+                script {
+                    echo "deploying the application"
+                }
             }
         }
     }
