@@ -107,5 +107,23 @@ pipeline {
                 }
             }
         }
+        stage ('commit version'){
+            steps {
+                script {
+                    withCredentials([usernamePassword(credentialsId:'github-Id', passwordVarialbe:'PASS', usernameVariable:'USER')]){
+                        sh 'git config --user.email "jenkins@example.com"'
+                        sh 'git config --user.name "jenkins"'
+
+                        sh 'git config set-url origin "https://${USER}:${PASS}@github.com/Vetri-Kumar/java-maven-app.git"'
+
+                        sh 'git status'
+                        sh 'git branch'
+                        sh 'git add .'
+                        sh 'git commit -m "ci: jenkins version"'
+                        sh 'git push origin HEAD=jenkins-shared-lib'
+                    }
+                }
+            }
+        }
     }
 }
