@@ -114,7 +114,9 @@ pipeline {
                         sh 'git config --user.email "jenkins@example.com"'
                         sh 'git config --user.name "jenkins"'
 
-                        sh 'git config set-url origin "https://${USER}:${PASS}@github.com/Vetri-Kumar/java-maven-app.git"'
+                        sh 'git remote set-url origin https://${USER}:${PASS}@github.com/Vetri-Kumar/java-maven-app.git'
+
+                        sh 'git config --list'
 
                         sh 'git status'
                         sh 'git branch'
