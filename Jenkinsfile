@@ -122,7 +122,7 @@ pipeline {
                         sh 'git branch'
                         sh 'git add .'
                         sh 'git commit -m "ci: jenkins version"'
-                        sh 'git push origin HEAD=jenkins-shared-lib'
+                        sh 'git push origin HEAD:jenkins-shared-lib'
                     }
                 }
             }
