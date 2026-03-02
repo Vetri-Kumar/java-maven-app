@@ -69,7 +69,7 @@ pipeline {
         stage('increment version'){
             steps {
                 script {
-                    echo "incremention the application version"
+                    echo "incrementing the application version"
                     sh "mvn build-helper:parse-version versions:set \
                     -DnewVersion=\\\${parsedVersion.majorVersion}.\\\${parsedVersion.minorVersion}.\\\${parsedVersion.nextIncrementalVersion} \
                     versions:commit"
