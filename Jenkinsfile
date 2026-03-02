@@ -122,7 +122,7 @@ pipeline {
                         sh 'git branch'
                         sh 'git add .'
                         sh 'git commit -m "ci: jenkins version"'
-                        sh 'git push origin'
+                        sh 'git push origin HEAD:main'
                     }
                 }
             }
