@@ -111,8 +111,8 @@ pipeline {
             steps {
                 script {
                     withCredentials([usernamePassword(credentialsId: 'github-Id', passwordVariable: 'PASS', usernameVariable: 'USER')]){
-                        sh 'git config --user.email "jenkins@example.com"'
-                        sh 'git config --user.name "jenkins"'
+                        sh 'git config user.email "jenkins@example.com"'
+                        sh 'git config user.name "jenkins"'
 
                         sh 'git remote set-url origin https://${USER}:${PASS}@github.com/Vetri-Kumar/java-maven-app.git'
 
