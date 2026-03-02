@@ -110,7 +110,7 @@ pipeline {
         stage ('commit version'){
             steps {
                 script {
-                    withCredentials([usernamePassword(credentialsId:'github-Id', passwordVarialbe:'PASS', usernameVariable:'USER')]){
+                    withCredentials([usernamePassword(credentialsId: 'github-Id', passwordVarialbe: 'PASS', usernameVariable: 'USER')]){
                         sh 'git config --user.email "jenkins@example.com"'
                         sh 'git config --user.name "jenkins"'
 
