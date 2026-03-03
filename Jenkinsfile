@@ -87,6 +87,23 @@ pipeline {
                 }
             }
         }
+
+        stage('Commit Version') {
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'github-Id',
+                                                  usernameVariable: 'USER',
+                                                  passwordVariable: 'PASS')]) {
+                    sh '''
+                        git config --global user.email "jenkins@example.com"
+                        git config --global user.name "jenkins"
+                        git remote set-url origin https://${USER}:${PASS}@github.com/Vetri-Kumar/java-maven-app.git
+                        git add .
+                        git diff --cached --quiet || git commit -m "ci: jenkins version"
+                        git push origin HEAD:main
+                    '''
+                }
+            }
+        }
                                             
         stage ('build image'){
             steps {
@@ -107,25 +124,6 @@ pipeline {
                 }
             }
         }
-        stage ('commit version'){
-            steps {
-                script {
-                    withCredentials([usernamePassword(credentialsId: 'github-Id', passwordVariable: 'PASS', usernameVariable: 'USER')]){
-                        sh 'git config --global user.email "jenkins@example.com"'
-                        sh 'git config --global user.name "jenkins"'
-
-                        sh "git remote set-url origin https://${USER}:${PASS}@github.com/Vetri-Kumar/java-maven-app.git"
-
-                        sh 'git config --list'
-
-                        sh 'git status'
-                        sh 'git branch'
-                        sh 'git add .'
-                        sh 'git commit -m "ci: jenkins version"'
-                        sh 'git push origin HEAD:main'
-                    }
-                }
-            }
-        }
+        
     }
 }
