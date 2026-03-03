@@ -119,6 +119,9 @@ pipeline {
                         git config --global user.email "jenkins@example.com"
                         git config --global user.name "jenkins"
                         git remote set-url origin https://${USER}:${PASS}@github.com/Vetri-Kumar/java-maven-app.git
+                        git config --list
+                        git status
+                        git branch
                         git add .
                         git diff --cached --quiet || git commit -m "ci: jenkins version"
                         git push origin HEAD:main
